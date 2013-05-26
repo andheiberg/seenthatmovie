@@ -1,67 +1,35 @@
-Template.seenMovies.helpers({
-	options: function() {
-		var user = Meteor.user();
-		var seenMovies = [];
+Template.seenMovies.movies = function() {
+	console.log('test');
+	var list = [];
+	Views.find({ userId: Meteor.userId(), seen: true }).forEach(function(view) {
+		list.push( Movies.findOne(view.movieId) );
+	});
+	return list;
+};
 
-		if (user) {
-			seenMovies = Views.find({userId: Meteor.user()._id, seen: true});
-			seenMovies = seenMovies.map(function(value, key, list) {
-				return value.movieId;
-			});
-		}
+Template.unseenMovies.movies = function() {
+	console.log('test');
+	var list = [];
+	Views.find({ userId: Meteor.userId(), seen: false }).forEach(function(view) {
+		list.push( Movies.findOne(view.movieId) );
+	});
+	return list;
+};
 
-		return {
-			find: {_id: {$in: seenMovies}},
-			//sort: {popularity: -1},
-			handle: moviesHandle
-		}
-	}
-});
+Template.unmarkedMovies.movies = function() {
+	console.log('test');
+	var list = [];
+	Views.find({ userId: Meteor.userId() }).forEach(function(view) {
+		list.push( view.movieId );
+	});
 
-Template.unseenMovies.helpers({
-	options: function() {
-		var user = Meteor.user();
-		var unseenMovies = [];
-
-		if (user) {
-			unseenMovies = Views.find({userId: Meteor.user()._id, seen: false});
-			unseenMovies = unseenMovies.map(function(value, key, list) {
-				return value.movieId;
-			});
-		}
-
-		return {
-			find: {_id: {$in: unseenMovies}},
-			//sort: {popularity: -1},
-			handle: moviesHandle
-		}
-	}
-});
-
-Template.unmarkedMovies.helpers({
-	options: function() {
-		var user = Meteor.user();
-		var markedMovies = [];
-
-		if (user) {
-			markedMovies = Views.find({userId: Meteor.user()._id});
-			markedMovies = markedMovies.map(function(value, key, list) {
-				return value.movieId;
-			});
-		}
-
-		return {
-			find: {_id: {$nin: markedMovies}},
-			//sort: {popularity: -1},
-			handle: moviesHandle
-		}
-	}
-});
+	return Movies.find({_id: {$nin: list}});
+};
 
 Template.moviesList.helpers({
 	movies: function() {
-		var options = {sort: this.sort, limit: this.handle.limit()};
-		return Movies.find(this.find, options);
+		console.log('test');
+		return Movies.find({}, {limit: moviesHandle.limit});
 	},
 	moviesReady: function() {
 		return this.handle.ready();

@@ -1,11 +1,19 @@
 /* CSS declarations go here */
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+.clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
 .movies-grid {
 	display: block;
 	padding: 0;
 	margin: 0 0 2em;
-	overflow: hidden;
+	@extend .clearfix;
 
 	.movie {
 		display: inline;
@@ -37,10 +45,22 @@
 .movie-info {
 	display: none;
 	position: absolute;
-	bottom: 0;
-	background: black;
-	color: white;
-	width: 100%;
+	z-index: 100;
+	top: 105%;
+	width: 120%;
+	left: -10%;
+	background-color: hsl(0, 0%, 98%);
+	background-image: linear-gradient(to bottom, hsl(0, 100%, 100%), hsl(0, 0%, 95%));
+	background-repeat: repeat-x;
+	border: 1px solid hsl(0, 0%, 83%);
+	color: hsla(0.0, 0.0%, 20.0%, 1.0);
+	box-shadow: 0 1px 4px hsla(0, 0%, 0%, 0.065);
+	border-radius: 4px;
+	padding: 1em;
+
+	h3 {
+		margin-top: 0;
+	}
 }
 
 #spinner {

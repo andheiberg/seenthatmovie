@@ -1,0 +1,63 @@
+/* CSS declarations go here */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.movies-grid {
+	display: block;
+	padding: 0;
+	margin: 0 0 2em;
+	overflow: hidden;
+
+	.movie {
+		display: inline;
+		height: auto;
+		float: left;
+		width: 25%;
+		padding: 0;
+
+		height: 352px; // should be calculated or use epic css fix
+		background-image: url('http://placehold.it/235x352&text=loading...');
+		background-size: 100%;
+	}
+
+	.movie:nth-of-type(4n+1) {
+		clear: both;
+	}
+}
+
+.movie {
+	position: relative;
+
+	&:hover {
+		.movie-info {
+			display: block;
+		}
+	}
+}
+
+.movie-info {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	background: black;
+	color: white;
+	width: 100%;
+}
+
+#spinner {
+	height: 300px;
+}
+
+.load-more {
+	display: block;
+	border-radius: 3px;
+	background: rgba(0, 0, 0, 0.05);
+	text-align: center;
+	height: 60px;
+	line-height: 60px;
+	margin-bottom: 10px;
+
+	&:hover {
+		text-decoration: none;
+		background: rgba(0, 0, 0, 0.1); 
+	}
+}

@@ -1,0 +1,21 @@
+<template name="header">
+	<header class="navbar">
+		<div class="navbar-inner">
+			<a class="brand" href="/">SeenThatMovie.com</a>
+			<ul class="nav">
+				<li class="{{activeRouteClass 'unmarkedMovies'}}">
+					<a href="{{unmarkedMoviesPath}}">Unmarked Movies</a>
+				</li>
+				<li class="{{activeRouteClass  'seenMovies'}}">
+					<a href="{{seenMoviesPath}}">Seen Movies</a>
+				</li>
+				<li class="{{activeRouteClass  'unseenMovies'}}">
+					<a href="{{unseenMoviesPath}}">Unseen Movies</a>
+				</li>
+			</ul>
+			<ul class="nav pull-right">
+				<li>{{loginButtons}}</li>
+			</ul>
+		</div>
+	</header>
+</template>

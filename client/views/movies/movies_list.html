@@ -1,0 +1,26 @@
+<template name="seenMovies">
+	{{> moviesList options}}
+</template>
+
+<template name="unseenMovies">
+	{{> moviesList options}}
+</template>
+
+<template name="unmarkedMovies">
+	{{> moviesList options}}
+</template>
+
+<template name="moviesList">
+	<ul class="movies-grid">
+		{{#each movies}}
+			{{> movieItem}}
+		{{/each}}
+	</ul>
+	{{#if moviesReady}}
+		{{#unless allMoviesLoaded}}
+			<a class="load-more" href="#">Load more</a>
+		{{/unless}}
+	{{else}}
+		<div>{{> spinner}}</div>
+	{{/if}}
+</template>

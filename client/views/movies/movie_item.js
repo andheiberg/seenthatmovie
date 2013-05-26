@@ -35,7 +35,8 @@ Template.movieItem.helpers({
 
 Template.movieItem.events({
 	'click': function(event) {
-		console.log('clicked');
-		Meteor.call('toggleViewStatus', this._id);
+		Meteor.call('toggleViewStatus', this._id, function(error, result) {
+			error && throwError(error.reason);
+		});
 	}
 });

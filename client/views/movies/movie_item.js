@@ -1,20 +1,4 @@
 Template.movieItem.helpers({
-	// ownJob: function() {
-	// 	return this.userId == Meteor.userId();
-	// },
-	// domain: function() {
-	// 	var a = document.createElement('a');
-	// 	a.href = this.url;
-	// 	return a.hostname;
-	// },
-	// upvotedClass: function() {
-	// 	var userId = Meteor.userId();
-	// 	if (userId && !_.include(this.upvoters, userId)) {
-	// 		return 'btn-primary upvoteable';
-	// 	} else {
-	// 		return 'disabled';
-	// 	}
-	// }
 	seen: function() {
 		var userId = Meteor.userId();
 		var view = Views.findOne({userId: userId, movieId: this._id});
@@ -35,8 +19,13 @@ Template.movieItem.helpers({
 
 Template.movieItem.events({
 	'click': function(event) {
-		Meteor.call('toggleViewStatus', this._id, function(error, result) {
-			error && throwError(error.reason);
-		});
+		this.clicks = this.clicks ? this.clicks + 1 : 1;
+	},
+	'mouseleave .movie': function(event, template) {
+		if (this.clicks && this.clicks % 2 != 0) {
+			Meteor.call('toggleViewStatus', this._id, function(error, result) {
+				error && throwError(error.reason);
+			});
+		}
 	}
 });

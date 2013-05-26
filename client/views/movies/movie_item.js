@@ -14,7 +14,21 @@ Template.movieItem.helpers({
 	},
 	url: function() {
 		return 'http://www.themoviedb.org/movie/' + this.id;
+	},
+	seenClass: function() {
+		var userId = Meteor.userId();
+		var view = Views.findOne({userId: userId, movieId: this._id});
+
+		if (typeof(view) != "undefined" && view.seen) {
+			return "movie-seen";
+		}
+		else if (typeof(view) != "undefined" && !view.seen) {
+			return "movie-unseen";
+		}
+
+		return "movie-unmarked";
 	}
+
 });
 
 Template.movieItem.events({
@@ -23,6 +37,14 @@ Template.movieItem.events({
 	},
 	'mouseleave .movie': function(event, template) {
 		if (this.clicks && this.clicks % 2 != 0) {
+			Meteor.call('toggleViewStatus', this._id, function(error, result) {
+				error && throwError(error.reason);
+			});
+		}
+		else if (this.clicks) {
+			Meteor.call('toggleViewStatus', this._id, function(error, result) {
+				error && throwError(error.reason);
+			});
 			Meteor.call('toggleViewStatus', this._id, function(error, result) {
 				error && throwError(error.reason);
 			});

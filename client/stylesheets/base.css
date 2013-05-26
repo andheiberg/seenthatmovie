@@ -1,0 +1,96 @@
+/* CSS declarations go here */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.clearfix:after, .movies-grid:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.movies-grid {
+  display: block;
+  padding: 0;
+  margin: 0 0 2em; }
+  .movies-grid .movie {
+    display: inline;
+    height: auto;
+    float: right;
+    width: 25%;
+    padding: 0;
+    height: 352px;
+    background-image: url("http://placehold.it/235x352&text=loading...");
+    background-size: 100%; }
+  .movies-grid .movie:nth-of-type(4n+1) {
+    clear: both; }
+
+.movie {
+  position: relative; }
+  .movie:hover .movie-info {
+    display: block; }
+  .movie.movie-seen:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 10px;
+    width: 10px;
+    background: green;
+  }
+  .movie.movie-unseen:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 10px;
+    width: 10px;
+    background: red;
+  }
+  .movie.movie-unmarked:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 10px;
+    width: 10px;
+    background: yellow;
+  }
+
+.movie-info {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: 98%;
+  width: 120%;
+  left: -10%;
+  padding: 1em 0 0 0; }
+  .movie-info .movie-info-inner {
+    background-color: #fafafa;
+    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    color: #333333;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    border-radius: 4px;
+    padding: 1em; }
+    .movie-info .movie-info-inner h3 {
+      margin-top: 0; }
+
+#spinner {
+  height: 300px; }
+
+.load-more {
+  display: block;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  text-align: center;
+  height: 60px;
+  line-height: 60px;
+  margin-bottom: 10px; }
+  .load-more:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.1); }
